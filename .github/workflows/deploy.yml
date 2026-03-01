@@ -21,6 +21,14 @@ jobs:
 
       - name: Build
         run: bun run build
+
+      - name: Add nojekyll file
+        run: touch out/.nojekyll
+
+      - name: Upload Artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'out/'
   deploy:
     needs: build
     runs-on: ubuntu-latest
