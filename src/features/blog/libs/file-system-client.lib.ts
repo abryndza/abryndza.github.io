@@ -5,21 +5,15 @@ const DIR_NAME = "src/content/posts";
 
 const fullPath = path.join(process.cwd(), DIR_NAME);
 
-const extractSlug = (fileName: string): string => {
-  return fileName.replace(/\.mdx$/, "");
-};
-
-const isArticleFile = (fileName: string): boolean => {
-  return fileName.endsWith(".mdx");
-};
-
 export const fileSystemClient = {
   async getArticleSlugs(): Promise<string[]> {
-    const files = await fs.readdir(fullPath);
-    return files.filter(isArticleFile).map(extractSlug);
+    const entries = await fs.readdir(fullPath, { withFileTypes: true });
+    return entries
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name);
   },
   async getArticleMetadata(slug: string): Promise<Record<string, unknown>> {
-    const { metadata } = await import(`@/content/posts/${slug}.mdx`);
+    const { metadata } = await import(`@/content/posts/${slug}/index.mdx`);
     return metadata;
   },
 };

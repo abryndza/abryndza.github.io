@@ -13,14 +13,12 @@ export interface ArticleCardProps {
 export const ArticleCard = ({ article }: ArticleCardProps) => {
   return (
     <Card
-      bg="transparent"
       component={Link}
       href={urls.blogArticle(article.slug)}
-      shadow="sm"
       padding="lg"
       radius="md"
       withBorder
-      className="max-w-100 cursor-pointer flex flex-col h-full"
+      className="max-w-100 min-w-80 cursor-pointer flex flex-col"
     >
       <Card.Section>
         <div className="relative w-full aspect-video bg-gray-100 dark:bg-zinc-800">
@@ -33,29 +31,32 @@ export const ArticleCard = ({ article }: ArticleCardProps) => {
           />
         </div>
       </Card.Section>
+      <Card.Section>
+        <div className="bg-light-bg">
+          <div className="py-4 px-5 flex flex-col grow">
+            <Text size="sm" c="dimmed" mb="xs">
+              {article.creationDate}
+            </Text>
 
-      <div className="mt-4 flex flex-col grow">
-        <Text size="sm" c="dimmed" mb="xs">
-          {article.creationDate}
-        </Text>
+            <Title
+              order={3}
+              className="text-xl sm:text-2xl font-bold mb-2 leading-tight"
+            >
+              {article.title}
+            </Title>
 
-        <Title
-          order={3}
-          className="text-xl sm:text-2xl font-bold mb-2 leading-tight"
-        >
-          {article.title}
-        </Title>
+            <Text c="dimmed" lineClamp={3} className="grow mb-4">
+              {article.intro}
+            </Text>
 
-        <Text c="dimmed" lineClamp={3} className="grow mb-4">
-          {article.intro}
-        </Text>
-
-        <Group justify="right" align="center" mt="auto" className="pt-4">
-          <Text size="sm" fw={500}>
-            Read more
-          </Text>
-        </Group>
-      </div>
+            <Group justify="right" align="center" mt="auto" className="pt-4">
+              <Text size="sm" fw={500}>
+                Read more
+              </Text>
+            </Group>
+          </div>
+        </div>
+      </Card.Section>
     </Card>
   );
 };

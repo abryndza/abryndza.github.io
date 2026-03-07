@@ -6,6 +6,7 @@
   --font-sans: var(--font-space-mono);
   --font-mono: var(--font-space-mono);
   --color-bg: #171717;
+  --color-light-bg: #1e1e1e;
 }
 
 body {
