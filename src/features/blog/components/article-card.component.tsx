@@ -14,13 +14,13 @@ export const ArticleCard = ({ article }: ArticleCardProps) => {
   return (
     <Card
       component={Link}
-      href={urls.blogArticle(article.slug)}
+      href={urls.article(article.slug)}
       padding="lg"
       radius="lg"
       className="max-w-100 min-w-80 cursor-pointer flex flex-col"
     >
       <Card.Section>
-        <div className="relative w-full aspect-video bg-gray-100">
+        <div className="relative w-full aspect-video bg-bg">
           <Image
             src={article.imagePreview}
             alt={article.title}

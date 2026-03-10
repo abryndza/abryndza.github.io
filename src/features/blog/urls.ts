@@ -1,3 +1,5 @@
 export const urls = {
-  blogArticle: (slug: string) => `/blog/${slug}`,
+  article: (slug: string) => `/blog/${slug}`,
+  main: () => `/blog`,
+  tag: (slug: string) => `/blog/${slug}`,
 };
