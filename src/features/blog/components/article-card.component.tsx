@@ -3,7 +3,7 @@
 import { Card } from "@mantine/core";
 import Image from "next/image";
 import Link from "next/link";
-import type { ArticleMetadata } from "@/features/blog/interfaces";
+import type { ArticleMetadata } from "@/features/blog/contracts";
 import { urls } from "@/features/blog/urls";
 
 export interface ArticleCardProps {

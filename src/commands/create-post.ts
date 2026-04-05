@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import prompts from "prompts";
-import { availableTags, TagSlugs } from "@/content/config";
+import { availableTags, TagSlugs } from "@/features/blog";
 
 const PROJECT_ROOT = process.cwd();
 const POSTS_DIR = path.join(PROJECT_ROOT, "src/content/posts");

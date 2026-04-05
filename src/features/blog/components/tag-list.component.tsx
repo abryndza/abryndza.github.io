@@ -1,6 +1,6 @@
 "use client";
 
-import { availableTags } from "@/content/config";
+import { availableTags } from "@/features/blog";
 import { useActiveBlogRoute } from "@/features/blog/hooks";
 import { urls } from "@/features/blog/urls";
 import { TagBadge } from "./tag-badge.component";

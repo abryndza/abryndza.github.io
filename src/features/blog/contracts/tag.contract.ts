@@ -1,4 +1,7 @@
-import type { Tag } from "@/features/blog/interfaces";
+export interface Tag {
+  name: string;
+  slug: string;
+}
 
 export enum TagSlugs {
   JavaScript = "javascript",

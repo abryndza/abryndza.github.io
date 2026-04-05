@@ -1,6 +1,7 @@
 import z from "zod";
-import { availableTags } from "@/content/config";
-import type { ArticleMetadata, Tag } from "@/features/blog/interfaces";
+import { availableTags } from "@/features/blog";
+
+import type { ArticleMetadata, Tag } from "@/features/blog/contracts";
 import { fileSystemClient } from "@/features/blog/libs/file-system-client.lib";
 import { createContract } from "@/shared/lib/contract.lib";
 

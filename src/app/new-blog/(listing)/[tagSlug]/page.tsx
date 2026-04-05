@@ -1,5 +1,4 @@
-import { availableTags } from "@/content/config";
-import { ListingPage } from "@/features/blog";
+import { availableTags, ListingPage } from "@/features/blog";
 import type { PageParams } from "@/shared/interfaces";
 
 export default async function Tag({ params }: PageParams<{ tagSlug: string }>) {

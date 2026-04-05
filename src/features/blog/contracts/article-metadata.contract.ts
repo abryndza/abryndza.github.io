@@ -1,4 +1,4 @@
-import type { Tag } from "./tag.interface";
+import type { Tag } from "./tag.contract";
 
 export interface ArticleMetadata {
   slug: string;
