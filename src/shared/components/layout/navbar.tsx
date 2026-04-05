@@ -4,7 +4,7 @@ import { Burger, Drawer } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { urls as blogUrls } from "@/features/blog/urls";
-import { NavbarIcons } from "./navbar-icons.component";
+import { NavbarIcons } from "./navbar-icons";
 
 const navItems = [
   { href: "/", label: "Strona główna" },

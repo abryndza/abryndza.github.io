@@ -1,11 +1,11 @@
 import type { z } from "zod";
-import { fail, type Result, success } from "@/shared/domain";
+import { fail, type Result, success } from "@/shared/helpers";
 
 export type ContractViolation = {
   issues: Record<string, string[]>;
 };
 
-export const createContract = <T>(schema: z.ZodType<T>) => {
+export const createContractParser = <T>(schema: z.ZodType<T>) => {
   return (data: unknown): Result<T, ContractViolation> => {
     const parsed = schema.safeParse(data);
 

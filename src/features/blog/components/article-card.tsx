@@ -3,11 +3,11 @@
 import { Card } from "@mantine/core";
 import Image from "next/image";
 import Link from "next/link";
-import type { ArticleMetadata } from "@/features/blog/contracts";
+import type { ArticlePreview } from "@/features/blog/contracts";
 import { urls } from "@/features/blog/urls";
 
 export interface ArticleCardProps {
-  article: ArticleMetadata;
+  article: ArticlePreview;
 }
 
 export const ArticleCard = ({ article }: ArticleCardProps) => {

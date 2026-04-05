@@ -1,1 +1,1 @@
-export type { PageParams } from "./page-params.interface";
+export type { PageParams } from "./page-params";

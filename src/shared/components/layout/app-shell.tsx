@@ -1,7 +1,7 @@
 "use client";
 
-import { Footer } from "./footer.component";
-import { Navbar } from "./navbar.component";
+import { Footer } from "./footer";
+import { Navbar } from "./navbar";
 
 type AppShellProps = {
   children: React.ReactNode;

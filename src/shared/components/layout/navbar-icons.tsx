@@ -6,7 +6,7 @@ import {
   IconSunFilled,
 } from "@tabler/icons-react";
 import { ExternalLink } from "../ui";
-import { NavbarIcon } from "./navbar-icon.component";
+import { NavbarIcon } from "./navbar-icon";
 
 const socialLinks = [
   {

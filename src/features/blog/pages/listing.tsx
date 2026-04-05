@@ -1,14 +1,12 @@
 import { ArticleCard } from "@/features/blog/components";
-import { articlesListService } from "@/features/blog/services";
+import { getArticles } from "@/features/blog/helpers";
 
 type ListingPageProps = {
   tagSlug?: string;
 };
 
 export async function ListingPage({ tagSlug }: ListingPageProps) {
-  const articles = tagSlug
-    ? await articlesListService.getByTag(tagSlug)
-    : await articlesListService.getAll();
+  const articles = await getArticles(tagSlug || "");
 
   if (articles.length === 0) {
     return (

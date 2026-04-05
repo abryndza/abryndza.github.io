@@ -1,9 +1,9 @@
 "use client";
 
-import { availableTags } from "@/features/blog";
+import { availableTags } from "@/features/blog/contracts";
 import { useActiveBlogRoute } from "@/features/blog/hooks";
 import { urls } from "@/features/blog/urls";
-import { TagBadge } from "./tag-badge.component";
+import { TagBadge } from "./tag-badge";
 
 export const TagList = () => {
   const { isMainActive, isTagActive } = useActiveBlogRoute();

@@ -12,8 +12,8 @@ Next.js 16 (App Router), React 19, TS, Tailwind v4, MDX, Bun, Biome.
 - **`*/components/ui/`**: Generic, context-independent UI primitives.
 
 ## 4. Conventions
-- **Naming**: Use strict suffixes (e.g., `.component.tsx`, `.service.ts`). Functions in `pages/` end with `Page` (except in `src/app/`).
-- **Errors**: Use `Result<T, F>` (`src/shared/domain/result.domain.ts`). No raw exceptions.
+- **Naming**: Use strict kebab-case (e.g., `article-card.tsx`, `articles-list.ts`). Functions in `pages/` end with `Page` (except in `src/app/`).
+- **Errors**: Use `Result<T, F>` (`src/shared/domain/result.ts`). No raw exceptions.
 - **State**: Built-in React state / SearchParams only.
 
 ## 5. Styling

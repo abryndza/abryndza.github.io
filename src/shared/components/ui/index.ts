@@ -1,2 +1,2 @@
-export * from "./button-link.component";
-export * from "./external-link.component";
+export * from "./button-link";
+export * from "./external-link";

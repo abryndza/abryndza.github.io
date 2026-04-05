@@ -1,1 +1,1 @@
-export * from "./use-active-blog-route.hook";
+export * from "./use-active-blog-route";
