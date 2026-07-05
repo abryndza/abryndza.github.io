@@ -13,6 +13,7 @@ Next.js 16 (App Router), React 19, TS, Tailwind v4, MDX, Bun, Biome.
 
 ## 4. Conventions
 - **Naming**: Use strict kebab-case (e.g., `article-card.tsx`, `articles-list.ts`). Functions in `pages/` end with `Page` (except in `src/app/`).
+- **Feature boundaries**: Code outside `src/features/<name>/` imports from the feature root (`@/features/<name>`) only. Expose cross-boundary API via explicit named exports in `src/features/<name>/index.ts`; avoid deep feature imports and avoid `export *` for public feature APIs.
 - **Errors**: Use `Result<T, F>` (`src/shared/domain/result.ts`). No raw exceptions.
 - **State**: Built-in React state / SearchParams only.
 

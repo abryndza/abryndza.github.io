@@ -1,10 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
 import prompts from "prompts";
-import { availableTags, TagSlugs } from "@/features/blog";
+import {
+  articlesDirectoryPath,
+  availableTags,
+  TagSlugs,
+} from "@/features/blog";
 
 const PROJECT_ROOT = process.cwd();
-const POSTS_DIR = path.join(PROJECT_ROOT, "src/content/posts");
 const TEMPLATE_PATH = path.join(PROJECT_ROOT, "src/commands/template.mdx");
 
 async function main() {
@@ -75,7 +78,7 @@ async function main() {
       .replace("{{creationDate}}", date)
       .replace("{{tags}}", tagsString);
 
-    const postDir = path.join(POSTS_DIR, slug);
+    const postDir = path.join(articlesDirectoryPath, slug);
 
     if (fs.existsSync(postDir)) {
       console.error(`Error: Post directory '${slug}' already exists.`);

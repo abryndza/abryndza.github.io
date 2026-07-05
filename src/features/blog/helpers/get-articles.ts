@@ -1,5 +1,6 @@
 import type { ArticlePreview } from "@/features/blog/contracts";
 import { getSlugs } from "./get-slugs";
+import { importArticle } from "./import-article";
 import { parseArticleMetadata } from "./parse-article-metadata";
 
 export const getArticles = async (
@@ -8,7 +9,7 @@ export const getArticles = async (
   const slugs = await getSlugs();
 
   const promises = slugs.map(async (slug: string) => {
-    const { metadata } = await import(`@/content/posts/${slug}/index.mdx`);
+    const { metadata } = await importArticle(slug);
     const parsed = await parseArticleMetadata(metadata);
     return { slug, ...parsed };
   });
