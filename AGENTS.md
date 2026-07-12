@@ -18,7 +18,11 @@ Next.js 16 (App Router), React 19, TS, Tailwind v4, MDX, Bun, Biome.
 - **State**: Built-in React state / SearchParams only.
 - **Verification**: Use `bun run typecheck` for TypeScript verification. Do not run `bun run build` just to typecheck.
 
-## 5. Styling
+## 5. Browser Automation
+- For browser testing, use the projectwide `agent-browser` MCP server. Assume `bun run dev` is already running in the background and the app is available at `http://localhost:3000`; do not open other domains.
+- After navigation, form submission, reload, or any DOM-changing action, take a fresh accessibility snapshot before using element refs.
+
+## 6. Styling
 - **Tailwind v4**: Use template literals (no clsx/tailwind-merge).
 - **Theme**: Use custom breakpoints (`mobile:`, `tablet:`, `laptop:`, `monitor:`) and CSS vars (e.g., `bg-bg`, `text-foreground`).
 - **Mantine**: Only for complex interactive components.

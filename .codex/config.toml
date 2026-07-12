@@ -1,0 +1,15 @@
+[mcp_servers.agent-browser]
+command = "bunx"
+args = ["agent-browser", "mcp", "--tools", "core,react,debug,tabs,mobile,network"]
+disabled_tools = [
+  "agent_browser_plugin_add",
+  "agent_browser_plugin_run",
+  "agent_browser_install",
+  "agent_browser_upgrade",
+  "agent_browser_chat",
+]
+
+[mcp_servers.agent-browser.env]
+AGENT_BROWSER_CONFIG = "agent-browser.json"
+AGENT_BROWSER_ENABLE = "react-devtools"
+AGENT_BROWSER_SESSION = "personal-local"

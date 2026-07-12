@@ -43,7 +43,6 @@ next-env.d.ts
 # ai agents
 .agents
 .gemini
-.codex
 .browser-data
 
 plan.md
