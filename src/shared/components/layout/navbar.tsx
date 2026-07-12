@@ -15,8 +15,8 @@ export const Navbar = () => {
   const [opened, { toggle, close }] = useDisclosure();
 
   return (
-    <header className="px-5 laptop:px-20 bg-white dark:bg-bg">
-      <nav className="flex items-center justify-between py-2 min-h-15 laptop:min-h-26">
+    <header className="relative z-[1000001] bg-white px-5 dark:bg-bg laptop:px-20">
+      <nav className="flex items-center justify-between py-2 min-h-15 tablet:min-h-26">
         <div className="flex items-center gap-12.5">
           <Link href="/" style={{ textDecoration: "none" }} scroll={false}>
             <span className="font-bold transition-colors duration-300 hover:text-gray-600 dark:hover:text-zinc-400 text-xl laptop:text-2xl text-gray-900 dark:text-gray-200">
@@ -55,7 +55,6 @@ export const Navbar = () => {
         onClose={close}
         size="100%"
         padding="md"
-        title="Menu"
         withCloseButton={false}
         zIndex={1000000}
         classNames={{
@@ -68,8 +67,8 @@ export const Navbar = () => {
           body: { display: "flex", flexDirection: "column", flex: 1 },
         }}
       >
-        <div className="flex-1 flex flex-col justify-between items-center pt-30 pb-10">
-          <ul className="list-none flex flex-col items-center gap-12">
+        <div className="flex-1 relative px-5 pb-10">
+          <ul className="absolute inset-x-0 top-1/2 flex -translate-y-1/2 list-none flex-col items-center gap-12">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link
@@ -85,7 +84,7 @@ export const Navbar = () => {
               </li>
             ))}
           </ul>
-          <div className="mt-8 flex gap-6">
+          <div className="absolute bottom-10 left-1/2 flex -translate-x-1/2 gap-6">
             <NavbarIcons size={30} className="w-14 h-14" />
           </div>
         </div>

@@ -17,10 +17,17 @@ export const MdxLink = ({ href = "", children }: MdxLinkProps) => {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1 text-foreground underline decoration-gray-400 underline-offset-4 hover:decoration-foreground"
+        className="text-foreground underline decoration-gray-400 underline-offset-4 hover:decoration-foreground"
       >
         {children}
-        <IconExternalLink aria-hidden="true" size={16} stroke={2} />
+        <span className="ml-1 inline-block whitespace-nowrap">
+          <IconExternalLink
+            aria-hidden="true"
+            size={16}
+            stroke={2}
+            className="inline"
+          />
+        </span>
       </a>
     );
   }

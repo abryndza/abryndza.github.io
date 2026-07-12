@@ -17,7 +17,7 @@ export const ArticleCard = ({ article }: ArticleCardProps) => {
       href={urls.article(article.slug)}
       padding="lg"
       radius="lg"
-      className="w-full tablet:max-w-100 tablet:min-w-80 cursor-pointer flex flex-col"
+      className="flex h-full w-full cursor-pointer flex-col"
     >
       <Card.Section>
         <div className="relative w-full aspect-video bg-bg">
