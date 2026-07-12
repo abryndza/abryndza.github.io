@@ -1,4 +1,4 @@
-import { urls } from "@/features/blog/urls";
+import { urls as blogUrls } from "@/features/blog/urls";
 import { ButtonLink } from "@/shared/components/ui";
 
 export function HomePage() {
@@ -7,7 +7,7 @@ export function HomePage() {
       <h1 className="text-3xl tablet:text-4xl laptop:text-6xl font-bold mb-8 laptop:mb-15 text-foreground">
         Hello, world!
       </h1>
-      <ButtonLink href={urls.main()} className="desktop:text-xl">
+      <ButtonLink href={blogUrls.main()} className="desktop:text-xl">
         Zobacz bloga
       </ButtonLink>
     </div>

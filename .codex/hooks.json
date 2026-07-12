@@ -1,0 +1,27 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$(git rev-parse --show-toplevel)/.codex/hooks/close-agent-browser.sh\"",
+            "statusMessage": "Cleaning up the agent browser session"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$(git rev-parse --show-toplevel)/.codex/hooks/close-agent-browser.sh\"",
+            "statusMessage": "Closing the agent browser session"
+          }
+        ]
+      }
+    ]
+  }
+}

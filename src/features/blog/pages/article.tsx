@@ -2,7 +2,6 @@ import type { MDXComponents } from "mdx/types";
 import { notFound } from "next/navigation";
 import {
   ArticleContent,
-  ArticleImage,
   MdxBlockquote,
   MdxCode,
   MdxHeading,
