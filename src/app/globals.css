@@ -17,8 +17,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-martian-mono);
-  --font-mono: var(--font-martian-mono);
+  --font-sans: var(--font-google-sans-code);
+  --font-mono: var(--font-google-sans-code);
   --color-bg: var(--background);
   --color-light-bg: var(--card-bg);
 
@@ -32,7 +32,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-martian-mono), monospace;
+  font-family: var(--font-google-sans-code), monospace;
 }
 
 [data-mantine-color-scheme="dark"] body {

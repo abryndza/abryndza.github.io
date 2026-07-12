@@ -16,6 +16,7 @@ Next.js 16 (App Router), React 19, TS, Tailwind v4, MDX, Bun, Biome.
 - **Feature boundaries**: Code outside `src/features/<name>/` imports from the feature root (`@/features/<name>`) only. Expose cross-boundary API via explicit named exports in `src/features/<name>/index.ts`; avoid deep feature imports and avoid `export *` for public feature APIs.
 - **Errors**: Use `Result<T, F>` (`src/shared/domain/result.ts`). No raw exceptions.
 - **State**: Built-in React state / SearchParams only.
+- **Verification**: Use `bun run typecheck` for TypeScript verification. Do not run `bun run build` just to typecheck.
 
 ## 5. Styling
 - **Tailwind v4**: Use template literals (no clsx/tailwind-merge).

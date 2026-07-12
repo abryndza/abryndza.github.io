@@ -1,12 +1,165 @@
-import { TagSlugs } from "@/content/toolkit"
-import image from "./image.png"
+import { ArticleImage, TagSlugs } from "@/content/toolkit"
+import image from "./image.jpg"
 
 export const metadata = {
     title: "Wzorzec projektowy singleton",
     creationDate: "2026-03-07",
     imagePreview: image,
-    tags: [TagSlugs.TodayILearned],
+    tags: [TagSlugs.TodayILearned, TagSlugs.TypeScript, TagSlugs.JavaScript],
     intro: "Wzorzec projektowy singleton to jeden z najprostszych i najbardziej znanych wzorców projektowych. Jego głównym celem jest zapewnienie, że dana klasa ma tylko jedną instancję, a także globalny punkt dostępu do tej instancji. W tym wpisie omówię, jak zaimplementować wzorzec singleton w języku TypeScript.",
 }
 
-# Template Post
+Singleton to **wzorzec projektowy**, który pozwala ograniczyć liczbę instancji klasy do jednej.
+Udostępnia też **globalny punkt dostępu do tej instancji**.
+
+Dzięki temu w całej aplikacji istnieje **tylko jedna instancja danej klasy**.
+Może to poprawić wydajność aplikacji, jeśli część obiektów wystarczy utworzyć raz,
+a potem używać tej samej instancji w wielu miejscach.
+Singleton sprawdza się również jako sposób na przechowywanie współdzielonego, globalnego stanu.
+
+> Singleton nie powinien być domyślnym wyborem dla każdej usługi. Najlepiej działa wtedy,
+> gdy naprawdę potrzebujemy jednej instancji i jasno kontrolowanego dostępu do zasobu.
+
+## Implementacja
+
+Podstawowa implementacja w TypeScript wygląda tak:
+
+```ts
+class Singleton {
+    private static instance: Singleton;
+
+    private constructor() {
+        // kod inicjalizujący
+    }
+
+    public static getInstance() {
+        if (!Singleton.instance) {
+            Singleton.instance = new Singleton();
+        }
+
+        return Singleton.instance;
+    }
+
+    // pozostałe metody
+}
+```
+
+Dostęp do konstruktora jest ograniczony, żeby nikt nie mógł utworzyć więcej niż jednej instancji.
+Zewnętrzny kod pobiera obiekt przez statyczną metodę `getInstance`, która tworzy instancję tylko wtedy,
+gdy jeszcze jej nie ma.
+
+```ts
+class Main {
+    method() {
+        const singletonInstance = Singleton.getInstance();
+        singletonInstance.fn();
+    }
+}
+```
+
+Możemy też utworzyć instancję od razu przy definicji klasy:
+
+```ts
+class Singleton {
+    private static instance = new Singleton();
+
+    private constructor() {
+        // kod inicjalizujący
+    }
+
+    public static getInstance() {
+        return Singleton.instance;
+    }
+}
+```
+
+Pierwsza wersja tworzy jednak obiekt dopiero wtedy, gdy jest potrzebny.
+W praktyce może to być korzystne, jeśli inicjalizacja jest kosztowna albo dany zasób nie zawsze będzie używany.
+
+## Przykład użycia
+
+### Zarządzanie pulą połączeń do bazy danych
+
+Singleton jest przydatny, gdy chcemy ograniczyć liczbę połączeń do bazy danych i ponownie używać już istniejących.
+Bez tego wzorca musielibyśmy przekazywać obiekt połączenia do każdej klasy, która potrzebuje dostępu do bazy.
+
+```ts
+class Database {
+    private static instance: Database;
+
+    private freeConnections: Connection[] = [];
+    private inUseConnections: Connection[] = [];
+    private totalConnections = 5;
+
+    private constructor() {
+        for (let i = 0; i < this.totalConnections; i++) {
+            this.freeConnections.push(new Connection());
+        }
+    }
+
+    public static getInstance() {
+        if (!Database.instance) {
+            Database.instance = new Database();
+        }
+
+        return Database.instance;
+    }
+
+    public getConnection() {
+        const connection = this.freeConnections.pop();
+
+        if (!connection) {
+            return this.waitForFreeConnection();
+        }
+
+        this.inUseConnections.push(connection);
+        return connection;
+    }
+
+    private waitForFreeConnection() {
+        // implementacja oczekiwania na wolne połączenie
+    }
+
+    public releaseConnection(connection: Connection) {
+        if (this.inUseConnections.indexOf(connection) === -1) {
+            throw new Error("Podane połączenie nie istnieje w tej puli");
+        }
+
+        this.inUseConnections = this.inUseConnections.filter(
+            (currentConnection) => currentConnection !== connection,
+        );
+        this.freeConnections.push(connection);
+    }
+}
+```
+
+Cały działający kod można znaleźć [w repozytorium z przykładami wzorców projektowych](https://github.com/Aadameqq/design-patterns/blob/main/patterns/singleton/main.ts).
+
+### Kiedy singleton ma sens
+
+Warto rozważyć singleton, gdy:
+
+- zarządzamy pojedynczym, kosztownym zasobem, takim jak pula połączeń,
+- konfiguracja aplikacji ma być ładowana raz i współdzielona,
+- potrzebujemy jednej kolejki zadań albo jednego rejestru zdarzeń,
+- tworzenie wielu instancji mogłoby powodować niespójny stan.
+
+Nie jest to dobre rozwiązanie, gdy:
+
+1. obiekt ma zależeć od kontekstu konkretnego użytkownika,
+2. testy wymagają łatwego podstawiania różnych implementacji,
+3. globalny stan utrudnia zrozumienie przepływu danych,
+4. zwykłe wstrzykiwanie zależności rozwiązuje problem prościej.
+
+#### Krótka lista kontrolna
+
+Przed użyciem singletona warto odpowiedzieć na kilka pytań:
+
+- Czy jedna instancja jest wymaganiem domenowym, czy tylko wygodnym skrótem?
+- Czy obiekt można łatwo zresetować lub zastąpić w testach?
+- Czy inicjalizacja jest bezpieczna przy równoległym dostępie?
+
+<ArticleImage src={image} alt="Ilustracja wpisu o wzorcu projektowym singleton" />
+
+Inline code, taki jak `Singleton.getInstance()`, dobrze nadaje się do krótkiego wskazania nazw metod,
+klas albo wartości w tekście. Dłuższe przykłady powinny zostać w osobnych blokach kodu.

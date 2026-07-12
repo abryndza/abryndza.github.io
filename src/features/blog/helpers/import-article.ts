@@ -1,6 +1,8 @@
 import path from "node:path";
+import type { MDXContent } from "mdx/types";
 
 type ArticleModule = {
+  default: MDXContent;
   metadata: Record<string, unknown>;
 };
 

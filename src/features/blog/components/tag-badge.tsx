@@ -30,9 +30,6 @@ export const TagBadge = ({
     <Link
       scroll={false}
       href={href}
-      onClick={(e) => {
-        if (isSelected) e.preventDefault();
-      }}
       aria-current={isSelected ? "page" : undefined}
       className={combinedClasses}
     >

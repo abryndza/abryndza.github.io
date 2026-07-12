@@ -1,1 +1,1 @@
-export { TagSlugs } from "@/features/blog";
+export { ArticleImage, TagSlugs } from "@/features/blog";

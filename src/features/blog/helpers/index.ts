@@ -1,3 +1,4 @@
+export { getArticle } from "./get-article";
 export { getArticles } from "./get-articles";
 export { getSlugs } from "./get-slugs";
 export { articlesDirectoryPath, importArticle } from "./import-article";

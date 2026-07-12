@@ -15,7 +15,7 @@ export const Navbar = () => {
   const [opened, { toggle, close }] = useDisclosure();
 
   return (
-    <header className="px-5 laptop:px-20 sticky top-0 z-1000001 bg-white dark:bg-bg">
+    <header className="px-5 laptop:px-20 bg-white dark:bg-bg">
       <nav className="flex items-center justify-between py-2 min-h-15 laptop:min-h-26">
         <div className="flex items-center gap-12.5">
           <Link href="/" style={{ textDecoration: "none" }} scroll={false}>

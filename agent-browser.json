@@ -1,0 +1,11 @@
+{
+  "$schema": "https://agent-browser.dev/schema.json",
+  "headed": false,
+  "profile": "./.browser-data",
+  "hideScrollbars": false,
+  "ignoreHttpsErrors": true,
+  "allowedDomains": ["localhost", "127.0.0.1"],
+  "contentBoundaries": true,
+  "maxOutput": 50000,
+  "namespace": "personal-local"
+}
