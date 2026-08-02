@@ -46,6 +46,7 @@ next-env.d.ts
 .agents
 .gemini
 .browser-data
+.claude
 
 plan.md
 todo.md
