@@ -47,6 +47,7 @@ next-env.d.ts
 .gemini
 .browser-data
 .claude
+.mcp.json
 
 plan.md
 todo.md

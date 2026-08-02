@@ -1,15 +1,21 @@
-import { ButtonLink } from "@/shared/components/ui";
+import Link from "next/link";
 
 export function NotFoundPage() {
-  return (
-    <div className="flex flex-col items-center justify-center grow text-center">
-      <h2 className="dark:text-zinc-500 text-zinc-600 text-8xl laptop:text-[10rem] font-bold mb-6 laptop:mb-10">
-        404
-      </h2>
-      <h1 className="text-2xl laptop:text-4xl font-semibold mb-6 laptop:mb-8 text-foreground">
-        Strona nie znaleziona
-      </h1>
-      <ButtonLink href="/">Wróć na stronę główną</ButtonLink>
-    </div>
-  );
+	return (
+		<div className="flex grow flex-col items-center justify-center py-20 text-center">
+			<h1>
+				<span className="block text-8xl font-bold text-accent">404</span>
+				<span className="mt-4 block text-2xl font-semibold tablet:text-3xl">
+					Strona nie znaleziona
+				</span>
+			</h1>
+
+			<Link
+				href="/"
+				className="dashed-link mt-8 inline-block underline-offset-8 hover:text-accent"
+			>
+				Wróć na stronę główną
+			</Link>
+		</div>
+	);
 }

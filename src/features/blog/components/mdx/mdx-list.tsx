@@ -1,17 +1,30 @@
-type MdxListProps = {
-  children?: React.ReactNode;
+import type { ComponentPropsWithoutRef } from "react";
+
+type MdxListProps = ComponentPropsWithoutRef<"ul"> & {
   ordered?: boolean;
 };
 
-export const MdxList = ({ children, ordered = false }: MdxListProps) => {
-  const Component = ordered ? "ol" : "ul";
-  const markerClass = ordered ? "list-decimal" : "list-disc";
+export const MdxList = ({
+  children,
+  className,
+  ordered = false,
+  ...props
+}: MdxListProps) => {
+  const classes = `list-outside space-y-2 pl-7 marker:text-accent ${
+    className ?? ""
+  }`;
+
+  if (ordered) {
+    return (
+      <ol className={`list-decimal ${classes}`} {...props}>
+        {children}
+      </ol>
+    );
+  }
 
   return (
-    <Component
-      className={`list-outside ${markerClass} space-y-3 pl-10 text-gray-600 marker:text-gray-800 dark:text-gray-400 dark:marker:text-gray-200 tablet:pl-12`}
-    >
+    <ul className={`list-disc ${classes}`} {...props}>
       {children}
-    </Component>
+    </ul>
   );
 };

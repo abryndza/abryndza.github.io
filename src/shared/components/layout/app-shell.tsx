@@ -1,7 +1,6 @@
-"use client";
-
 import { Footer } from "./footer";
 import { Navbar } from "./navbar";
+import { SkipLink } from "./skip-link";
 
 type AppShellProps = {
   children: React.ReactNode;
@@ -9,9 +8,14 @@ type AppShellProps = {
 
 export const AppShell = ({ children }: AppShellProps) => {
   return (
-    <div className="w-full min-h-screen flex flex-col">
+    <div className="flex min-h-screen w-full flex-col">
+      <SkipLink />
       <Navbar />
-      <main className="mb-15 px-5 laptop:mb-20 laptop:px-20 grow flex flex-col">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="app-layout flex grow flex-col pb-10 focus:outline-none"
+      >
         {children}
       </main>
       <Footer />

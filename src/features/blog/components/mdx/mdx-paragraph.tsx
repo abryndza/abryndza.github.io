@@ -1,7 +1,7 @@
-type MdxParagraphProps = {
-  children?: React.ReactNode;
-};
+import type { ComponentPropsWithoutRef } from "react";
 
-export const MdxParagraph = ({ children }: MdxParagraphProps) => {
-  return <p className="text-gray-600 dark:text-gray-400">{children}</p>;
+type MdxParagraphProps = ComponentPropsWithoutRef<"p">;
+
+export const MdxParagraph = ({ className, ...props }: MdxParagraphProps) => {
+  return <p className={`break-words ${className ?? ""}`} {...props} />;
 };

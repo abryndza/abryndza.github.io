@@ -1,94 +1,154 @@
 "use client";
 
-import { Burger, Drawer } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { IconMenu2, IconX } from "@tabler/icons-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { urls as blogUrls } from "@/features/blog/urls";
-import { NavbarIcons } from "./navbar-icons";
+import { ThemeToggle } from "./theme-toggle";
 
-const navItems = [
+const MENU_ID = "menu-items";
+
+// Matches the `tablet` breakpoint from globals.css.
+const DESKTOP_MEDIA_QUERY = "(min-width: 640px)";
+
+type NavItem = {
+  href: string;
+  label: string;
+  /** Announced in the menu, but has no route yet, so it is never current. */
+  isPlaceholder?: boolean;
+};
+
+const navItems: NavItem[] = [
   { href: "/", label: "Strona główna" },
-  { href: blogUrls.main(), label: "Blog" },
+  { href: blogUrls.main(), label: "Wpisy" },
+  { href: "/links", label: "Zbiór linków", isPlaceholder: true },
 ];
 
+const withoutTrailingSlash = (path: string) =>
+  path !== "/" && path.endsWith("/") ? path.slice(0, -1) : path;
+
 export const Navbar = () => {
-  const [opened, { toggle, close }] = useDisclosure();
+  const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  const currentPath = withoutTrailingSlash(pathname || "/");
+
+  // The menu only exists below the breakpoint; leaving it open while the
+  // desktop navigation takes over would bring it back on the way down.
+  useEffect(() => {
+    const desktop = window.matchMedia(DESKTOP_MEDIA_QUERY);
+
+    const closeOnDesktop = () => {
+      if (desktop.matches) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    closeOnDesktop();
+    desktop.addEventListener("change", closeOnDesktop);
+
+    return () => desktop.removeEventListener("change", closeOnDesktop);
+  }, []);
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return;
+    }
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    };
+
+    const closeOnOutsidePointer = (event: PointerEvent) => {
+      if (!headerRef.current?.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    document.addEventListener("pointerdown", closeOnOutsidePointer);
+
+    return () => {
+      window.removeEventListener("keydown", closeOnEscape);
+      document.removeEventListener("pointerdown", closeOnOutsidePointer);
+    };
+  }, [isMenuOpen]);
+
+  const isActive = (item: NavItem) => {
+    if (item.isPlaceholder) {
+      return false;
+    }
+
+    return item.href === "/"
+      ? currentPath === "/"
+      : currentPath === item.href || currentPath.startsWith(`${item.href}/`);
+  };
 
   return (
-    <header className="relative z-[1000001] bg-white px-5 dark:bg-bg laptop:px-20">
-      <nav className="flex items-center justify-between py-2 min-h-15 tablet:min-h-26">
-        <div className="flex items-center gap-12.5">
-          <Link href="/" style={{ textDecoration: "none" }} scroll={false}>
-            <span className="font-bold transition-colors duration-300 hover:text-gray-600 dark:hover:text-zinc-400 text-xl laptop:text-2xl text-gray-900 dark:text-gray-200">
-              Adam Bryndza
-            </span>
+    <header ref={headerRef} className="app-layout">
+      <div className="flex flex-col border-b border-border tablet:flex-row tablet:items-center tablet:justify-between">
+        <div className="flex items-center justify-between py-4 tablet:py-6">
+          <Link
+            href="/"
+            className="whitespace-nowrap text-xl font-semibold tablet:text-2xl"
+          >
+            Adam Bryndza
           </Link>
 
-          <ul className="hidden tablet:flex items-center gap-6 list-none m-0 p-0">
+          {/*
+            Below the breakpoint the theme toggle lives here and nowhere else,
+            so opening the menu does not make it jump to the bottom of the list.
+          */}
+          <div className="flex items-center gap-1 tablet:hidden">
+            <ThemeToggle />
+            <button
+              type="button"
+              aria-label={isMenuOpen ? "Zamknij menu" : "Otwórz menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls={MENU_ID}
+              onClick={() => setIsMenuOpen((wasOpen) => !wasOpen)}
+              className="flex size-8 cursor-pointer items-center justify-center rounded-sm text-foreground hover:text-accent"
+            >
+              {isMenuOpen ? (
+                <IconX aria-hidden="true" size={22} stroke={2} />
+              ) : (
+                <IconMenu2 aria-hidden="true" size={22} stroke={2} />
+              )}
+            </button>
+          </div>
+        </div>
+
+        <nav aria-label="Nawigacja główna">
+          <ul
+            id={MENU_ID}
+            className={`${
+              isMenuOpen ? "flex" : "hidden"
+            } list-none flex-col items-center gap-1 pb-4 tablet:flex tablet:flex-row tablet:items-center tablet:gap-5 tablet:pb-0`}
+          >
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  style={{ textDecoration: "none" }}
-                  className="text-base font-normal text-gray-800 dark:text-gray-400"
-                  scroll={false}
+                  aria-current={isActive(item) ? "page" : undefined}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`block py-2 font-medium hover:text-accent ${
+                    isActive(item) ? "active-nav" : ""
+                  }`}
                 >
                   {item.label}
                 </Link>
               </li>
             ))}
+            <li className="hidden py-1 tablet:block">
+              <ThemeToggle />
+            </li>
           </ul>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <div className="hidden tablet:flex items-center gap-4">
-            <NavbarIcons />
-          </div>
-          <div className="tablet:hidden flex items-center">
-            <Burger opened={opened} onClick={toggle} size="sm" />
-          </div>
-        </div>
-      </nav>
-
-      <Drawer
-        opened={opened}
-        onClose={close}
-        size="100%"
-        padding="md"
-        withCloseButton={false}
-        zIndex={1000000}
-        classNames={{
-          content: "bg-bg !bg-bg",
-          header: "bg-bg !bg-bg",
-          body: "bg-bg !bg-bg",
-        }}
-        styles={{
-          content: { display: "flex", flexDirection: "column" },
-          body: { display: "flex", flexDirection: "column", flex: 1 },
-        }}
-      >
-        <div className="flex-1 relative px-5 pb-10">
-          <ul className="absolute inset-x-0 top-1/2 flex -translate-y-1/2 list-none flex-col items-center gap-12">
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  style={{ textDecoration: "none" }}
-                  onClick={close}
-                  className="text-3xl font-bold text-foreground"
-                  scroll={false}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <div className="absolute bottom-10 left-1/2 flex -translate-x-1/2 gap-6">
-            <NavbarIcons size={30} className="w-14 h-14" />
-          </div>
-        </div>
-      </Drawer>
+        </nav>
+      </div>
     </header>
   );
 };

@@ -1,30 +1,34 @@
-import Image, { type ImageProps } from "next/image";
+import type { ImageProps } from "next/image";
+import type { ReactNode } from "react";
+import { ArticleImageZoom } from "./article-image-zoom";
 
-type ArticleImageProps = Omit<ImageProps, "alt" | "fill"> & {
-  alt?: string;
+type ArticleImageProps = {
+	src: ImageProps["src"];
+	alt?: string;
+	caption?: ReactNode;
+	sizes?: string;
 };
 
 export const ArticleImage = ({
-  alt,
-  sizes,
-  className: _className,
-  ...props
+	src,
+	alt,
+	caption,
+	sizes,
 }: ArticleImageProps) => {
-  if (!alt) {
-    throw new Error(
-      'Article images must include alt text. In MDX posts, import ArticleImage from "@/content/toolkit" and use <ArticleImage src={image} alt="Describe the image" />.',
-    );
-  }
+	if (!alt) {
+		throw new Error(
+			'Article images must include alt text. In MDX posts, import ArticleImage from "@/content/toolkit" and use <ArticleImage src={image} alt="Describe the image" />.',
+		);
+	}
 
-  return (
-    <span className="relative my-4 block aspect-video w-full overflow-hidden rounded-[var(--mantine-radius-md)] bg-light-bg">
-      <Image
-        {...props}
-        alt={alt}
-        fill
-        className="object-cover"
-        sizes={sizes || "(max-width: 960px) 100vw, 880px"}
-      />
-    </span>
-  );
+	return (
+		<figure className="my-6 [&_img]:mx-auto [&_img]:rounded-none [&_img]:border-0">
+			<ArticleImageZoom src={src} alt={alt} sizes={sizes} />
+			{caption ? (
+				<figcaption className="mt-2 text-center text-sm text-muted-foreground">
+					{caption}
+				</figcaption>
+			) : null}
+		</figure>
+	);
 };

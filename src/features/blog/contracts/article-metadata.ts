@@ -37,7 +37,10 @@ const staticImageDataSchema = z.custom<StaticImageData>(
 const articleMetadata = z.object({
   title: z.string(),
   intro: z.string(),
-  creationDate: z.string(),
+  creationDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+    message: "Expected an ISO calendar date (YYYY-MM-DD)",
+  }),
+  isFeatured: z.boolean(),
   imagePreview: staticImageDataSchema,
   tags: z.array(tagSchema),
 });

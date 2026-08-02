@@ -1,33 +1,33 @@
-"use client";
-
 import { availableTags } from "@/features/blog/contracts";
-import { useActiveBlogRoute } from "@/features/blog/hooks";
 import { urls } from "@/features/blog/urls";
-import { TagBadge } from "./tag-badge";
+import { TagLink, tagLabel } from "./tag-link";
 
-export const TagList = () => {
-  const { isMainActive, isTagActive } = useActiveBlogRoute();
+interface TagListProps {
+	currentTagSlug?: string;
+}
 
-  return (
-    <nav>
-      <ul className="flex flex-wrap gap-3 tablet:gap-5">
-        <li>
-          <TagBadge
-            name={"Wszystkie"}
-            href={urls.main()}
-            isSelected={isMainActive}
-          />
-        </li>
-        {availableTags.map((tag) => (
-          <li key={tag.slug}>
-            <TagBadge
-              name={tag.name}
-              href={urls.tag(tag.slug)}
-              isSelected={isTagActive(tag.slug)}
-            />
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
+export const TagList = ({ currentTagSlug }: TagListProps) => {
+	return (
+		<nav aria-label="Filtr tagów">
+			<ul className="flex flex-wrap items-center gap-x-4 gap-y-2">
+				<li>
+					<TagLink
+						label="Wszystkie"
+						href={urls.main()}
+						isCurrent={!currentTagSlug}
+					/>
+				</li>
+
+				{availableTags.map((tag) => (
+					<li key={tag.slug}>
+						<TagLink
+							label={tagLabel(tag)}
+							href={urls.tag(tag.slug)}
+							isCurrent={tag.slug === currentTagSlug}
+						/>
+					</li>
+				))}
+			</ul>
+		</nav>
+	);
 };

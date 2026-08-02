@@ -5,6 +5,7 @@ import {
   MdxBlockquote,
   MdxCode,
   MdxHeading,
+  MdxHorizontalRule,
   MdxLink,
   MdxList,
   MdxListItem,
@@ -26,18 +27,45 @@ const UnsupportedMdxImage = () => {
 
 const articleMdxComponents: MDXComponents = {
   p: MdxParagraph,
-  h2: ({ children }) => <MdxHeading level={2}>{children}</MdxHeading>,
-  h3: ({ children }) => <MdxHeading level={3}>{children}</MdxHeading>,
-  h4: ({ children }) => <MdxHeading level={4}>{children}</MdxHeading>,
+  h2: ({ id, children, ...props }) => (
+    <MdxHeading level={2} id={id} {...props}>
+      {children}
+    </MdxHeading>
+  ),
+  h3: ({ id, children, ...props }) => (
+    <MdxHeading level={3} id={id} {...props}>
+      {children}
+    </MdxHeading>
+  ),
+  h4: ({ id, children, ...props }) => (
+    <MdxHeading level={4} id={id} {...props}>
+      {children}
+    </MdxHeading>
+  ),
+  h5: ({ id, children, ...props }) => (
+    <MdxHeading level={5} id={id} {...props}>
+      {children}
+    </MdxHeading>
+  ),
+  h6: ({ id, children, ...props }) => (
+    <MdxHeading level={6} id={id} {...props}>
+      {children}
+    </MdxHeading>
+  ),
   a: MdxLink,
   blockquote: MdxBlockquote,
-  ul: ({ children }) => <MdxList>{children}</MdxList>,
-  ol: ({ children }) => <MdxList ordered>{children}</MdxList>,
+  ul: MdxList,
+  ol: ({ children, ...props }) => (
+    <MdxList ordered {...props}>
+      {children}
+    </MdxList>
+  ),
   li: MdxListItem,
-  img: UnsupportedMdxImage,
+  strong: MdxStrong,
   code: MdxCode,
   pre: MdxPre,
-  strong: MdxStrong,
+  hr: MdxHorizontalRule,
+  img: UnsupportedMdxImage,
 };
 
 export async function ArticlePage({ slug }: ArticlePageProps) {

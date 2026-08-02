@@ -1,11 +1,14 @@
-type MdxBlockquoteProps = {
-  children?: React.ReactNode;
-};
+import type { ComponentPropsWithoutRef } from "react";
 
-export const MdxBlockquote = ({ children }: MdxBlockquoteProps) => {
+type MdxBlockquoteProps = ComponentPropsWithoutRef<"blockquote">;
+
+export const MdxBlockquote = ({ className, ...props }: MdxBlockquoteProps) => {
   return (
-    <blockquote className="border-l-4 border-gray-300 pl-5 text-gray-600 italic dark:border-zinc-600 dark:text-gray-400">
-      {children}
-    </blockquote>
+    <blockquote
+      className={`break-words border-s-3 border-accent ps-4 not-italic opacity-80 ${
+        className ?? ""
+      }`}
+      {...props}
+    />
   );
 };

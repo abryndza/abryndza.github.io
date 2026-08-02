@@ -1,3 +1,4 @@
+import path from "node:path";
 import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
 
@@ -13,6 +14,16 @@ const nextConfig: NextConfig = {
   },
 };
 
-const withMDX = createMDX({});
+const mdxPlugin = (relativePath: string) =>
+  path.join(process.cwd(), relativePath);
+
+const withMDX = createMDX({
+  options: {
+    rehypePlugins: [
+      "rehype-slug",
+      [mdxPlugin("src/features/blog/mdx/rehype-shiki.mjs"), {}],
+    ],
+  },
+});
 
 export default withMDX(nextConfig);

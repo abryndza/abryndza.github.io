@@ -2,9 +2,10 @@ import type { ArticlePreview } from "@/features/blog/contracts";
 import { getSlugs } from "./get-slugs";
 import { importArticle } from "./import-article";
 import { parseArticleMetadata } from "./parse-article-metadata";
+import { sortArticles } from "./sort-articles";
 
 export const getArticles = async (
-  tagSlug: string,
+  tagSlug?: string,
 ): Promise<ArticlePreview[]> => {
   const slugs = await getSlugs();
 
@@ -14,13 +15,13 @@ export const getArticles = async (
     return { slug, ...parsed };
   });
 
-  const articles = await Promise.all(promises);
+  const articles = sortArticles(await Promise.all(promises));
 
-  if (tagSlug) {
-    return articles.filter((article) =>
-      article.tags.some((tag) => tag.slug === tagSlug),
-    );
+  if (!tagSlug) {
+    return articles;
   }
 
-  return articles;
+  return articles.filter((article) =>
+    article.tags.some((tag) => tag.slug === tagSlug),
+  );
 };

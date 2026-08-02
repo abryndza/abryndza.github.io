@@ -1,6 +1,7 @@
 export { MdxBlockquote } from "./mdx-blockquote";
 export { MdxCode } from "./mdx-code";
 export { MdxHeading } from "./mdx-heading";
+export { MdxHorizontalRule } from "./mdx-horizontal-rule";
 export { MdxLink } from "./mdx-link";
 export { MdxList } from "./mdx-list";
 export { MdxListItem } from "./mdx-list-item";

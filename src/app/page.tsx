@@ -1,8 +1,8 @@
-import { HomePage } from "@/shared/pages";
+import { HomePage } from "@/features/blog";
 
 export const metadata = {
-  title: "Adam Bryndza - Software Engineer",
-  description: "Strona w budowie",
+  title: "Blog",
+  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 };
 
 export default function Home() {

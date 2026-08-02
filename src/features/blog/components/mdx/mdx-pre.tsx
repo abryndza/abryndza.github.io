@@ -1,17 +1,8 @@
-import React from "react";
-import { MdxCode, type MdxCodeProps } from "./mdx-code";
+import type { ComponentPropsWithoutRef } from "react";
 
-type MdxPreProps = {
-  children?: React.ReactNode;
-};
+type MdxPreProps = ComponentPropsWithoutRef<"pre">;
 
-export const MdxPre = ({ children }: MdxPreProps) => {
-  if (
-    React.isValidElement<MdxCodeProps>(children) &&
-    children.type === MdxCode
-  ) {
-    return React.cloneElement(children, { block: true });
-  }
-
-  return <pre>{children}</pre>;
+/** Shiki supplies the detailed token markup; global CSS owns its dynamic theme. */
+export const MdxPre = ({ className, ...props }: MdxPreProps) => {
+  return <pre className={`code-block ${className ?? ""}`} {...props} />;
 };

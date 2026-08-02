@@ -1,7 +1,7 @@
-type MdxListItemProps = {
-  children?: React.ReactNode;
-};
+import type { ComponentPropsWithoutRef } from "react";
 
-export const MdxListItem = ({ children }: MdxListItemProps) => {
-  return <li className="py-1.5 pl-2">{children}</li>;
+type MdxListItemProps = ComponentPropsWithoutRef<"li">;
+
+export const MdxListItem = ({ className, ...props }: MdxListItemProps) => {
+  return <li className={`my-2 ${className ?? ""}`} {...props} />;
 };

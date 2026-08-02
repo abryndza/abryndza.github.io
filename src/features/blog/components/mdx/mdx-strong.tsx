@@ -1,7 +1,7 @@
-type MdxStrongProps = {
-  children?: React.ReactNode;
-};
+import type { ComponentPropsWithoutRef } from "react";
 
-export const MdxStrong = ({ children }: MdxStrongProps) => {
-  return <strong className="font-extrabold text-foreground">{children}</strong>;
+type MdxStrongProps = ComponentPropsWithoutRef<"strong">;
+
+export const MdxStrong = ({ className, ...props }: MdxStrongProps) => {
+  return <strong className={`font-bold ${className ?? ""}`} {...props} />;
 };

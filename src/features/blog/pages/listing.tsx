@@ -1,26 +1,62 @@
-import { ArticleCard } from "@/features/blog/components";
-import { getArticles } from "@/features/blog/helpers";
+import { notFound } from "next/navigation";
+import {
+  ArticleItem,
+  type Breadcrumb,
+  Breadcrumbs,
+  TagList,
+} from "@/features/blog/components";
+import { describeTag, findTag, getArticles } from "@/features/blog/helpers";
+import { urls } from "@/features/blog/urls";
 
 type ListingPageProps = {
   tagSlug?: string;
 };
 
-export async function ListingPage({ tagSlug }: ListingPageProps) {
-  const articles = await getArticles(tagSlug || "");
+const LISTING_DESCRIPTION =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
-  if (articles.length === 0) {
-    return (
-      <div className="col-span-full flex justify-center text-base text-gray-600 dark:text-gray-400">
-        Brak wpisów dla tego tagu.
-      </div>
-    );
+export async function ListingPage({ tagSlug }: ListingPageProps) {
+  const tag = tagSlug ? findTag(tagSlug) : undefined;
+
+  if (tagSlug && !tag) {
+    notFound();
   }
+
+  const articles = await getArticles(tagSlug);
+
+  const breadcrumbs: Breadcrumb[] = [
+    { label: "Strona główna", href: urls.home() },
+    tag ? { label: "Wpisy", href: urls.main() } : { label: "Wpisy" },
+    ...(tag ? [{ label: tag.name }] : []),
+  ];
 
   return (
     <>
-      {articles.map((article) => (
-        <ArticleCard key={article.slug} article={article} />
-      ))}
+      <Breadcrumbs items={breadcrumbs} />
+
+      <h1 className="my-4 break-words text-2xl font-bold tablet:text-3xl">
+        {tag ? `Tag: ${tag.name}` : "Wpisy"}
+      </h1>
+
+      <p className="mt-2 mb-6 break-words italic">
+        {tag ? describeTag(tag) : LISTING_DESCRIPTION}
+      </p>
+
+      <TagList currentTagSlug={tagSlug} />
+
+      {articles.length === 0 ? (
+        <p className="mt-8 text-muted-foreground">
+          {tag
+            ? "Brak wpisów dla tego tagu."
+            : "Nie ma tu jeszcze żadnych wpisów."}
+        </p>
+      ) : (
+        <ul className="mt-4">
+          {articles.map((article) => (
+            <ArticleItem key={article.slug} article={article} />
+          ))}
+        </ul>
+      )}
     </>
   );
 }
