@@ -135,7 +135,7 @@ export const Navbar = () => {
                   href={item.href}
                   aria-current={isActive(item) ? "page" : undefined}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`block py-2 font-medium hover:text-accent ${
+                  className={`block py-2 font-medium hover:text-accent tablet:px-2 tablet:py-1 ${
                     isActive(item) ? "active-nav" : ""
                   }`}
                 >

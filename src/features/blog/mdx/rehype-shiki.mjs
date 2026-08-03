@@ -31,6 +31,8 @@ const transformerCodeBlock = () => ({
       return;
     }
 
+    this.addClassToHast(node, "has-file-name");
+
     node.children.unshift({
       type: "element",
       tagName: "span",

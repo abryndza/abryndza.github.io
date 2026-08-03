@@ -7,10 +7,10 @@ export function HomeAllArticlesLink() {
     <div className="my-8 text-center">
       <Link
         href={urls.main()}
-        className="dashed-link inline-flex items-center gap-1 hover:text-accent"
+        className="inline-flex items-center gap-1 hover:text-accent"
       >
         Wszystkie wpisy
-        <IconArrowRight aria-hidden="true" size={18} stroke={2} />
+        <IconArrowRight aria-hidden="true" size={24} stroke={2} />
       </Link>
     </div>
   );
