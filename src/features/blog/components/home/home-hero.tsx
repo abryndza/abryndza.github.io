@@ -1,20 +1,7 @@
-import { IconBrandGithub, IconBrandLinkedin } from "@tabler/icons-react";
+import { SocialLinks } from "@/shared/components/social-links";
 
 const HERO_DESCRIPTION =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-
-const socialLinks = [
-  {
-    href: "https://github.com/abryndza",
-    label: "GitHub",
-    icon: IconBrandGithub,
-  },
-  {
-    href: "https://www.linkedin.com/in/adam-bryndza",
-    label: "LinkedIn",
-    icon: IconBrandLinkedin,
-  },
-];
 
 export function HomeHero() {
   return (
@@ -28,22 +15,7 @@ export function HomeHero() {
       <div className="flex items-center gap-4">
         <span className="text-muted-foreground">Znajdziesz mnie tu:</span>
 
-        {socialLinks.map((social) => {
-          const Icon = social.icon;
-
-          return (
-            <a
-              key={social.href}
-              href={social.href}
-              aria-label={social.label}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-foreground hover:text-accent"
-            >
-              <Icon aria-hidden="true" size={24} stroke={2} />
-            </a>
-          );
-        })}
+        <SocialLinks />
       </div>
     </section>
   );
