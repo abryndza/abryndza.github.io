@@ -20,9 +20,9 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { href: "/", label: "Strona główna" },
   { href: blogUrls.main(), label: "Wpisy" },
   { href: "/links", label: "Zbiór linków", isPlaceholder: true },
+  { href: "/about", label: "O mnie", isPlaceholder: true },
 ];
 
 const withoutTrailingSlash = (path: string) =>
