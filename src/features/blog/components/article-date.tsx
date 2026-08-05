@@ -1,4 +1,4 @@
-import { IconCalendar } from "@tabler/icons-react";
+import { IconCalendarWeek } from "@tabler/icons-react";
 import { formatCreationDate } from "@/features/blog/helpers/format-creation-date";
 
 type ArticleDateProps = {
@@ -12,11 +12,11 @@ export const ArticleDate = ({
 }: ArticleDateProps) => {
   return (
     <div className="flex items-center gap-x-2 text-muted-foreground">
-      <IconCalendar
+      <IconCalendarWeek
         aria-hidden="true"
         size={size === "lg" ? 20 : 18}
         stroke={2}
-        className="shrink-0"
+        className="shrink-0 mb-[3px]"
       />
       <time
         dateTime={creationDate}

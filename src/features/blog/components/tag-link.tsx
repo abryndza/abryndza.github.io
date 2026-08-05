@@ -5,16 +5,22 @@ interface TagLinkProps {
 	label: string;
 	href: string;
 	isCurrent?: boolean;
+	hasUnderline?: boolean;
 }
 
 export const tagLabel = (tag: Tag) => `#${tag.name}`;
 
-export const TagLink = ({ label, href, isCurrent = false }: TagLinkProps) => {
+export const TagLink = ({
+	label,
+	href,
+	isCurrent = false,
+	hasUnderline = true,
+}: TagLinkProps) => {
 	if (isCurrent) {
 		return (
 			<span
 				aria-current="page"
-				className="active-nav inline-block wrap-anywhere"
+				className="dashed-link inline-block wrap-anywhere text-accent decoration-2 decoration-accent"
 			>
 				{label}
 			</span>
@@ -24,7 +30,9 @@ export const TagLink = ({ label, href, isCurrent = false }: TagLinkProps) => {
 	return (
 		<Link
 			href={href}
-			className="dashed-link inline-block wrap-anywhere decoration-2 hover:text-accent hover:decoration-accent"
+			className={`inline-block wrap-anywhere hover:text-accent ${
+				hasUnderline ? "dashed-link decoration-2 hover:decoration-accent" : ""
+			}`}
 		>
 			{label}
 		</Link>

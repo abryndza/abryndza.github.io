@@ -38,11 +38,13 @@ export async function ListingPage({ tagSlug }: ListingPageProps) {
         {tag ? `Tag: ${tag.name}` : "Wpisy"}
       </h1>
 
-      <p className="mt-2 mb-6 break-words italic">
+      <p className="mt-2 mb-6 break-words italic text-prose-foreground">
         {tag ? describeTag(tag) : LISTING_DESCRIPTION}
       </p>
 
-      <TagList currentTagSlug={tagSlug} />
+      <div className="border-b border-border pb-6">
+        <TagList currentTagSlug={tagSlug} />
+      </div>
 
       {articles.length === 0 ? (
         <p className="mt-8 text-muted-foreground">
@@ -51,7 +53,7 @@ export async function ListingPage({ tagSlug }: ListingPageProps) {
             : "Nie ma tu jeszcze żadnych wpisów."}
         </p>
       ) : (
-        <ul className="mt-4">
+        <ul className="mt-8">
           {articles.map((article) => (
             <ArticleItem key={article.slug} article={article} />
           ))}

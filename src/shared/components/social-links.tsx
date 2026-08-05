@@ -26,7 +26,7 @@ export const SocialLinks = () => {
             aria-label={social.label}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-foreground hover:text-accent"
+            className="text-muted-foreground hover:text-accent"
           >
             <Icon aria-hidden="true" size={24} stroke={2} />
           </a>

@@ -9,6 +9,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Prose runs slightly softer than UI text so long reads are less harsh. */
+  --prose-foreground: #2e2e2e;
   --muted: #f5f5f5;
   --muted-foreground: #666666;
   --border: #e5e7eb;
@@ -24,6 +26,7 @@
 [data-mantine-color-scheme="dark"] {
   --background: #171717;
   --foreground: #ededed;
+  --prose-foreground: #d0d0d0;
   --muted: #1e1e1e;
   --muted-foreground: #a0a0a0;
   --border: #3a3a3a;
@@ -34,6 +37,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-prose-foreground: var(--prose-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);

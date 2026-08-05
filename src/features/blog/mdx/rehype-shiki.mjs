@@ -5,7 +5,7 @@ import {
   transformerNotationWordHighlight,
 } from "@shikijs/transformers";
 
-const THEMES = { light: "min-light", dark: "night-owl" };
+const THEMES = { light: "min-light", dark: "github-dark-default" };
 
 const PRELOADED_LANGS = [
   "bash",

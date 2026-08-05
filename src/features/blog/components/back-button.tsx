@@ -13,7 +13,7 @@ export const BackButton = () => {
     <button
       type="button"
       onClick={goBack}
-      className="mb-2 flex cursor-pointer items-center gap-1 text-sm hover:text-accent"
+      className="mb-2 flex cursor-pointer items-center gap-1 text-sm text-muted-foreground hover:text-accent"
     >
       <IconArrowNarrowLeft aria-hidden="true" size={20} stroke={2} />
       Wróć

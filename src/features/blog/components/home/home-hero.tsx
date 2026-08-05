@@ -10,7 +10,9 @@ export function HomeHero() {
         Blog
       </h1>
 
-      <p className="mt-2 mb-6 italic">{HERO_DESCRIPTION}</p>
+      <p className="mt-2 mb-6 italic text-prose-foreground">
+        {HERO_DESCRIPTION}
+      </p>
 
       <div className="flex items-center gap-4">
         <span className="text-muted-foreground">Znajdziesz mnie tu:</span>

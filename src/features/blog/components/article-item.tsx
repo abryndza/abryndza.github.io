@@ -34,7 +34,9 @@ export const ArticleItem = ({
 
       <ArticleDate creationDate={article.creationDate} />
 
-      <p className="mt-1 wrap-anywhere">{article.intro}</p>
+      <p className="mt-1 wrap-anywhere text-prose-foreground">
+        {article.intro}
+      </p>
     </li>
   );
 };

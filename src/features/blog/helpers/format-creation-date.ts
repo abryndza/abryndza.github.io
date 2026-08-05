@@ -1,8 +1,8 @@
 const CREATION_DATE_PATTERN = /^(\d{4})-(\d{2})-(\d{2})$/;
 
 const dateFormatter = new Intl.DateTimeFormat("pl-PL", {
-	day: "numeric",
-	month: "short",
+	day: "2-digit",
+	month: "2-digit",
 	year: "numeric",
 	timeZone: "UTC",
 });

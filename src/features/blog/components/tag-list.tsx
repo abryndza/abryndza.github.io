@@ -9,7 +9,7 @@ interface TagListProps {
 export const TagList = ({ currentTagSlug }: TagListProps) => {
 	return (
 		<nav aria-label="Filtr tagów">
-			<ul className="flex flex-wrap items-center gap-x-4 gap-y-2">
+			<ul className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
 				<li>
 					<TagLink
 						label="Wszystkie"
