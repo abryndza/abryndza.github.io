@@ -1,7 +1,7 @@
 import { SocialLinks } from "@/shared/components/social-links";
 
 const HERO_DESCRIPTION =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+  "Piszę o automatyzacji i optymalizacji pracy w dobie AI oraz zmianach w rozwoju oprogramowania. Czasem pojawią się też inne tematy.";
 
 export function HomeHero() {
   return (

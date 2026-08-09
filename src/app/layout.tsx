@@ -7,6 +7,7 @@ import {
 import type { Metadata } from "next";
 import { Google_Sans_Code } from "next/font/google";
 import { AppShell } from "@/shared/components/layout";
+import { siteUrl } from "@/shared/helpers";
 
 import "@mantine/core/styles.css";
 import "./globals.css";
@@ -24,12 +25,25 @@ const theme = createTheme({
   headings: { fontFamily: "var(--font-google-sans-code), monospace" },
 });
 
+const SITE_NAME = "Adam Bryndza";
+
+const SITE_DESCRIPTION =
+  "Blog o automatyzacji i optymalizacji pracy w dobie AI oraz zmianach w rozwoju oprogramowania.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-  ),
-  title: "Adam Bryndza - Blog",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: SITE_NAME,
+    template: `%s · ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    type: "website",
+    locale: "pl_PL",
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({

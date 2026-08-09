@@ -13,7 +13,7 @@ type ListingPageProps = {
 };
 
 const LISTING_DESCRIPTION =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+  "Wszystkie wpisy w jednym miejscu. Zawęź listę tagiem, jeśli szukasz konkretnego tematu.";
 
 export async function ListingPage({ tagSlug }: ListingPageProps) {
   const tag = tagSlug ? findTag(tagSlug) : undefined;
@@ -49,7 +49,7 @@ export async function ListingPage({ tagSlug }: ListingPageProps) {
       {articles.length === 0 ? (
         <p className="mt-8 text-muted-foreground">
           {tag
-            ? "Brak wpisów dla tego tagu."
+            ? "Pod tym tagiem nie ma jeszcze wpisów."
             : "Nie ma tu jeszcze żadnych wpisów."}
         </p>
       ) : (
